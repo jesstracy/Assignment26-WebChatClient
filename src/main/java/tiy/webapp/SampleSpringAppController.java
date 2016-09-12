@@ -36,4 +36,8 @@ public class SampleSpringAppController {
         session.setAttribute("userName", userName);
         return "redirect:/";
     }
+
+
+
+
 }
