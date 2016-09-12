@@ -33,11 +33,12 @@ public class WebChatClientTest {
 
         String serverResponse = myWebChatClient.sendMessage(testMessage);
 
+//        System.out.println(serverResponse);
         //Make sure you get a response
         assertNotNull(serverResponse);
         //Make sure the message from the server is what you think it should be
         //What I'm getting back from tomcat server: HTTP/1.1 400
-        assertEquals("HTTP/1.1 400 ", serverResponse);
+        assertEquals("Echo: " + testMessage, serverResponse);
     }
 
 }

@@ -13,7 +13,7 @@ public class WebChatClient {
     public String sendMessage(String message) {
         String serverResponse = null;
         try {
-            Socket clientSocket = new Socket("localhost", 8080);
+            Socket clientSocket = new Socket("localhost", 8005);
 
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
