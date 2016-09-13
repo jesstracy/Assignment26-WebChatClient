@@ -78,13 +78,14 @@ public class SampleSpringAppController {
 //    }
     @RequestMapping(path = "/sendHistory", method = RequestMethod.POST)
     public String sendHistory(HttpSession session) {
-        System.out.println("IN SEND HISTORY");
+//        System.out.println("IN SEND HISTORY PATH");
         if (myWebChatClient == null) {
             System.out.println("No history to display...");
         } else {
+//            System.out.println("in else block on send history path");
             ArrayList<String> responses = myWebChatClient.sendHistoryMessage();
             for (String response : responses) {
-                System.out.println(response);
+                System.out.println("*" + response);
             }
         }
         return "redirect:/chat";

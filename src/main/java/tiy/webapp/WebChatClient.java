@@ -36,13 +36,17 @@ public class WebChatClient {
         String serverResponse = null;
         ArrayList<String> responses = new ArrayList<String>();
         try {
+//            System.out.println("\tIN SENDHISTORYMESSAGE");
             createClientSocket();
 
             out.println("history");
-
-            while ((serverResponse = in.readLine()) != null) {
+            serverResponse = in.readLine();
+            while (!(serverResponse.equals("HISTORY::END."))) {
+//                System.out.println("\tGetting a line from server... " + serverResponse);
                 responses.add(serverResponse);
+                serverResponse = in.readLine();
             }
+//            System.out.println(responses.toString());
 
         } catch (IOException ex) {
             ex.printStackTrace();
