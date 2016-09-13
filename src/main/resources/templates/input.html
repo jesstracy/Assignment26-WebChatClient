@@ -14,10 +14,6 @@
     <form action="/sendHistory" method="post">
         <button type="submit">Print history</button>
 
-        <!--{{#responses}}-->
-            <!--{{name}}-->
-            <!--Show responses here!-->
-        <!--{{/responses}}-->
     </form>
 
     {{#serverResponse}}
@@ -26,8 +22,13 @@
         <!--Show response here..-->
     {{/serverResponse}}
 
+    <!--{{#responsesHashMap}}-->
+        <!--{{name}}-->
+    <!--{{/responsesHashMap}}-->
 
-
+    {{#responses}}
+        {{.}}
+    {{/responses}}
 
 </body>
 </html>

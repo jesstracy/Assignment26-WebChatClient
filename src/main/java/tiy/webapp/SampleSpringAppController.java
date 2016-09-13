@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 public class SampleSpringAppController {
+//    HashMap<String, String> responsesHashMap = new HashMap<>();
+
     WebChatClient myWebChatClient;
     @RequestMapping(path = "/person-url", method = RequestMethod.GET)
     public String person(Model model, String name, String city, int age) {
@@ -88,11 +91,22 @@ public class SampleSpringAppController {
         } else {
 //            System.out.println("in else block on send history path");
             ArrayList<String> responses = myWebChatClient.sendHistoryMessage();
+//            HashMap<String, String> responsesHashMap = myWebChatClient.sendHistoryMessageNew();
+//            System.out.println(responsesHashMap.toString());
             for (String response : responses) {
+//            for (String response : responsesHashMap.values()) {
                 System.out.println("*" + response);
             }
-//            model.addAttribute(responses);
+
+            //Make it a hashmap:
+//            for (String response : responses) {
+//                responsesHashMap.put("name", response);
+//            }
+
+            model.addAttribute("responses", responses);
+//            model.addAttribute("responsesHashMap", responsesHashMap);
+//            System.out.println("Hashmap: " + responsesHashMap.toString());
         }
-        return "redirect:/chat";
+        return "input";
     }
 }

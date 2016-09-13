@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by jessicatracy on 9/12/16.
@@ -17,6 +18,8 @@ public class WebChatClient {
     Socket clientSocket;
     PrintWriter out;
     BufferedReader in;
+
+    HashMap<String, String> responsesHashMap = new HashMap<>();
 
     public String sendMessage(String message) {
         String serverResponse = null;
@@ -58,6 +61,33 @@ public class WebChatClient {
         return responses;
 
     }
+
+//    public HashMap<String, String> sendHistoryMessageNew() {
+//        String serverResponse = null;
+//
+//        try {
+////            System.out.println("\tIN SENDHISTORYMESSAGE");
+//            createClientSocket();
+//
+//            out.println("history");
+//            serverResponse = in.readLine();
+//            int counter = 1;
+//            while (!(serverResponse.equals("HISTORY::END."))) {
+////                System.out.println("\tGetting a line from server... " + serverResponse);
+//                System.out.println("Putting response in hashmap: " + serverResponse);
+//                responsesHashMap.put("name" + counter, serverResponse);
+//                serverResponse = in.readLine();
+//                counter++;
+//            }
+//            System.out.println("!!!!!! HashMap in client class: " + responsesHashMap.toString());
+//
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        return responsesHashMap;
+//
+//    }
 
     public void createClientSocket() throws IOException {
         clientSocket = new Socket("localhost", 8005);
