@@ -38,39 +38,50 @@ public class SampleSpringAppController {
         return "redirect:/";
     }
 
-    // Input page
-    @RequestMapping(path = "/chat", method = RequestMethod.GET)
-    public String input(Model model, HttpSession session, String message) {
-        return "input";
-    }
-
-    //They can both be /chat, post sends the info,
-    @RequestMapping(path = "/chatOutput", method = RequestMethod.POST)
-    public String send(HttpSession session, String message) {
-        //When I'm just sysouting the server response, I don't need to set the message on the session - > just need it to send to server and can go away each time!
-        //Also don't need to add to model because the view does not need to see it at all.
-//        session.setAttribute("message", message);
-//        System.out.println("Message: " + message);
-
-        //BUT, I will have to add it to the model when I'm printing it to the browser screen!
-        myWebChatClient = new WebChatClient();
-        String serverResponse = myWebChatClient.sendMessage(message);
-        System.out.println(serverResponse);
-        return "redirect:/chat";
-    }
-
-//    @RequestMapping(path = "/chat", method = RequestMethod.POST)
+//    // Input page
+//    @RequestMapping(path = "/chat", method = RequestMethod.GET)
 //    public String input(Model model, HttpSession session, String message) {
-//        session.setAttribute("message", message);
-//        System.out.println("Message: " + message);
-//        WebChatClient myWebChatClient = new WebChatClient();
+//        return "input";
+//    }
+//
+//
+//    @RequestMapping(path = "/chatOutput", method = RequestMethod.POST)
+//    public String send(Model model, String message) {
+//        //When I'm just sysouting the server response, I don't need to set the message on the session - > just need it to send to server and can go away each time!
+//        //Also don't need to add to model because the view does not need to see it at all.
+////        session.setAttribute("message", message);
+////        System.out.println("Message: " + message);
+//
+//        //BUT, I will have to add it to the model when I'm printing it to the browser screen!
+//        myWebChatClient = new WebChatClient();
 //        String serverResponse = myWebChatClient.sendMessage(message);
 //        System.out.println(serverResponse);
 //
-//        return "input";
+//        model.addAttribute("serverResponse", serverResponse);
+//
+//        return "redirect:/chat";
 //    }
+
+    @RequestMapping(path = "/chatNew", method = RequestMethod.GET)
+    public String inputNew(Model model,HttpSession session, String message) {
+        if (message != null) {
+            //When I'm just sysouting the server response, I don't need to set the message on the session - > just need it to send to server and can go away each time!
+            //Also don't need to add to model because the view does not need to see it at all.
+
+            myWebChatClient = new WebChatClient();
+            String serverResponse = myWebChatClient.sendMessage(message);
+            System.out.println(serverResponse);
+
+            //BUT, I will have to add it to the model when I'm printing it to the browser screen!
+            model.addAttribute("serverResponse", serverResponse);
+
+        }
+
+        return "input";
+    }
+
     @RequestMapping(path = "/sendHistory", method = RequestMethod.POST)
-    public String sendHistory(HttpSession session) {
+    public String sendHistory(Model model) {
 //        System.out.println("IN SEND HISTORY PATH");
         if (myWebChatClient == null) {
             System.out.println("No history to display...");
@@ -80,6 +91,7 @@ public class SampleSpringAppController {
             for (String response : responses) {
                 System.out.println("*" + response);
             }
+//            model.addAttribute(responses);
         }
         return "redirect:/chat";
     }

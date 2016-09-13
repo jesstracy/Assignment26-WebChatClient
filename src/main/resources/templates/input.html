@@ -5,13 +5,29 @@
     <title>Chat room</title>
 </head>
 <body>
-    <form action="/chatOutput" method="post">
+    <form action="/chatNew" method="get">
     <!--<form action="/chat" method="post">-->
         <input type="text" placeholder="Enter your message" name="message"/>
-        <button type="submit">Send</button>
+        <button type="submit">Send!</button>
+
     </form>
     <form action="/sendHistory" method="post">
         <button type="submit">Print history</button>
+
+        <!--{{#responses}}-->
+            <!--{{name}}-->
+            <!--Show responses here!-->
+        <!--{{/responses}}-->
     </form>
+
+    {{#serverResponse}}
+        <b>Response from server...</b>
+        {{serverResponse}}
+        <!--Show response here..-->
+    {{/serverResponse}}
+
+
+
+
 </body>
 </html>

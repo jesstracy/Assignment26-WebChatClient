@@ -10,6 +10,9 @@ import java.util.ArrayList;
 /**
  * Created by jessicatracy on 9/12/16.
  */
+
+// Assignment14 has a server that you can connect to that has capability to print history!!
+// Note: History capability not pushed to github
 public class WebChatClient {
     Socket clientSocket;
     PrintWriter out;
