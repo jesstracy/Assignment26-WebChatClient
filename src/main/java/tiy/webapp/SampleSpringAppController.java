@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 public class SampleSpringAppController {
+    WebChatClient myWebChatClient;
     @RequestMapping(path = "/person-url", method = RequestMethod.GET)
     public String person(Model model, String name, String city, int age) {
 
@@ -29,6 +31,7 @@ public class SampleSpringAppController {
         return "redirect:/";
     }
 
+    //Don't
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     public String logout(Model model, HttpSession session) {
         session.removeAttribute("userName");
@@ -52,14 +55,38 @@ public class SampleSpringAppController {
         return "input";
     }
 
-    @RequestMapping(path = "/send", method = RequestMethod.POST)
+    //They can both be /chat, post sends the info,
+    @RequestMapping(path = "/chat", method = RequestMethod.POST)
     public String send(HttpSession session, String message) {
         session.setAttribute("message", message);
-        System.out.println("Message: " + message);
-        WebChatClient myWebChatClient = new WebChatClient();
+//        System.out.println("Message: " + message);
+        myWebChatClient = new WebChatClient();
         String serverResponse = myWebChatClient.sendMessage(message);
         System.out.println(serverResponse);
         return "redirect:/chat";
     }
 
+//    @RequestMapping(path = "/chat", method = RequestMethod.POST)
+//    public String input(Model model, HttpSession session, String message) {
+//        session.setAttribute("message", message);
+//        System.out.println("Message: " + message);
+//        WebChatClient myWebChatClient = new WebChatClient();
+//        String serverResponse = myWebChatClient.sendMessage(message);
+//        System.out.println(serverResponse);
+//
+//        return "input";
+//    }
+    @RequestMapping(path = "/sendHistory", method = RequestMethod.POST)
+    public String sendHistory(HttpSession session) {
+        System.out.println("IN SEND HISTORY");
+        if (myWebChatClient == null) {
+            System.out.println("No history to display...");
+        } else {
+            ArrayList<String> responses = myWebChatClient.sendHistoryMessage();
+            for (String response : responses) {
+                System.out.println(response);
+            }
+        }
+        return "redirect:/chat";
+    }
 }

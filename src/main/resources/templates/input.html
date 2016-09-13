@@ -5,9 +5,13 @@
     <title>Chat room</title>
 </head>
 <body>
-    <form action="/send" method="post">
+    <form action="/chat" method="post">
+    <!--<form action="/chat" method="post">-->
         <input type="text" placeholder="Enter your message" name="message"/>
         <button type="submit">Send</button>
+    </form>
+    <form action="/sendHistory" method="post">
+        <button type="submit">Print history</button>
     </form>
 </body>
 </html>
