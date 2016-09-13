@@ -106,6 +106,7 @@ public class SampleSpringAppController {
             model.addAttribute("responses", responses);
 //            model.addAttribute("responsesHashMap", responsesHashMap);
 //            System.out.println("Hashmap: " + responsesHashMap.toString());
+
         }
         return "input";
     }
